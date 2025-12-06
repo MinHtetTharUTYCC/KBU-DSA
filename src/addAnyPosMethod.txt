@@ -1,0 +1,34 @@
+public  void addAnyPos(int data,int pos){
+        Node newNode = new Node(data);
+
+        // Case1:inset at first
+        if(pos==1){
+            addFirst(data);
+            return;
+        }
+
+        // (pos-1)the node
+        Node temp = header;
+        int count = 1;
+
+        while(temp!=null && count<pos-1){
+            temp = temp.getNext();
+            count++;
+        }
+
+        //if temp is null,position is OUT OF BOUNDS
+        if(temp == null){
+            System.out.println("Invalid position: " + pos);
+            return;
+        }
+
+        //Case 2: Insert at last
+        if(temp == tail){
+            addLast(data);
+            return;
+        }
+
+        //Case 3: insert in middle
+        newNode.setNext(temp.getNext());
+        temp.setNext(newNode);
+    }

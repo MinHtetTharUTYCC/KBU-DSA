@@ -1,3 +1,5 @@
+package stack.stack_linked_list;
+
 public class Node {
     private int iData;
     private Node next;
