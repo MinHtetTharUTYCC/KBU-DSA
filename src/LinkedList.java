@@ -206,6 +206,19 @@ public class LinkedList {
         System.out.println("Node deleted at position: "+ position + " with data "+ noteToDelete.getData());
     }
 
+    public int countNodes(Node head) {
+        int count = 0;
+        Node current = head;
+
+        while (current != null) {
+            count++;
+            current = current.getNext();     //private Node next; public void getNext(){return next};
+        }
+        return count;
+    }
+
+
+
     public  static void main(String[] args){
         System.out.println("LINKED LIST DEMO");
 
@@ -221,33 +234,34 @@ public class LinkedList {
 
         list.getHeader();
         list.getTail();
+        System.out.println(list.countNodes(list.getHeader()));
 
-        System.out.println("\nUsing traverse");
-        list.traverse();
-
-        System.out.println("\nUsing delFirst...");
-        list.delFirst();
-        list.getHeader();
-        list.getTail();
-
-        System.out.println("\nUsing traverse");
-        list.traverse();
-
-        System.out.println("\nUsing delLast...");
-        list.delLast();
-        list.getTail();
-
-        System.out.println("\nUsing traverse");
-        list.traverse();
-
-        System.out.println("\nUsing searching...");
-        list.searching(90);
-
-        System.out.println("Using delAnyPos");
-        list.delAnyPos(2);
-        list.traverse();
-        list.getHeader();
-        list.getTail();
+//        System.out.println("\nUsing traverse");
+//        list.traverse();
+//
+//        System.out.println("\nUsing delFirst...");
+//        list.delFirst();
+//        list.getHeader();
+//        list.getTail();
+//
+//        System.out.println("\nUsing traverse");
+//        list.traverse();
+//
+//        System.out.println("\nUsing delLast...");
+//        list.delLast();
+//        list.getTail();
+//
+//        System.out.println("\nUsing traverse");
+//        list.traverse();
+//
+//        System.out.println("\nUsing searching...");
+//        list.searching(90);
+//
+//        System.out.println("Using delAnyPos");
+//        list.delAnyPos(2);
+//        list.traverse();
+//        list.getHeader();
+//        list.getTail();
 
     }
 }

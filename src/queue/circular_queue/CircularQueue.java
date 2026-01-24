@@ -1,12 +1,12 @@
-package queue;
+package queue.circular_queue;
 
-public class QueueArray {
+public class CircularQueue {
     private int size;
     private int[] queArr;
     private int front;
     private int rear;
 
-    public QueueArray(int size) {
+    public CircularQueue(int size) {
         this.size = size;
         queArr = new int[size];
         front = -1;
@@ -18,17 +18,15 @@ public class QueueArray {
             System.out.println("Queue is full");
             return;
         }
-        if(rear == size-1){
-            rear = 0;
-        }else{
-            rear++;
-        }
-        queArr[rear] = data;
-        if(front == -1){  //update front if it's empty queue
+
+        if(isEmpty()){
             front = 0;
         }
 
-        System.out.println("Enqueued: " + queArr[rear]);
+        rear = (rear + 1) % size;
+        queArr[rear] = data;
+
+        System.out.println("Enqueued: "+ queArr[rear]);
     }
 
     public int dequeue(){
@@ -41,7 +39,7 @@ public class QueueArray {
         if(front == rear){ //if only one item
             front=rear=-1;
         }else{
-            front++;
+            front = (front+1)  % size;
         }
 
         System.out.println("Dequeued: " + data);
@@ -61,5 +59,11 @@ public class QueueArray {
 
     public boolean isFull(){
         return front == (rear+1)%size;
+    }
+
+    public void getAll(){
+        for(int i: queArr){
+            System.out.print(i+" ");
+        }
     }
 }

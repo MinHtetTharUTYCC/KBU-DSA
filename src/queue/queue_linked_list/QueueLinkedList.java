@@ -10,11 +10,33 @@ public class QueueLinkedList {
     }
 
     public void enqueue(int data){
+        Node newNode = new Node(data);
+        if(isEmpty()){
+            front = newNode;
+        }else{
+            Node temp = rear;
+            rear.setNext(newNode);
+        }
+        rear = newNode;
+        System.out.println("Enqueue: "+ newNode.getData());
 
     }
 
     public Node dequeue(){
-        return null;
+        if(isEmpty()){
+            System.out.println("Queue is Empty");
+            return null;
+        }
+        Node temp = front.getNext();
+        Node temp2 = front;
+
+        System.out.println("Dequeue: "+ temp.getData());
+        front = temp;
+        if(temp2== rear){
+            rear=front=null;
+        }
+
+        return front;
     }
 
     public  Node peek(){

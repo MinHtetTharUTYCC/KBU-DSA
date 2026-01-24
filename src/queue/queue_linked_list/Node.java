@@ -2,11 +2,17 @@ package queue.queue_linked_list;
 
 public class Node {
     private int data;
+    private  int priority;
     private Node next;
 
     public Node(int data) {
         this.data = data;
         next=null;
+    }
+    public Node(int data,int pri) {
+        this.data = data;
+        next=null;
+        this.priority = pri;
     }
 
     public int getData() {
@@ -23,5 +29,9 @@ public class Node {
 
     public void setNext(Node next) {
         this.next = next;
+    }
+
+    public int getPriority() {
+        return priority;
     }
 }

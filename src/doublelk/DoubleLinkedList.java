@@ -152,6 +152,15 @@ public class DoubleLinkedList {
         System.out.println("Node SUCCESSFULLY deleted at position: " + position);
     }
 
+    public MyNode getHeader(){
+        System.out.println("The header node is: " + header.getIData());
+        return header;
+    }
+    public MyNode getTail(){
+        System.out.println("The tail node is: " + tail.getIData());
+        return tail;
+    }
+
     private void traversal(){
         if(header == null){
             System.out.println("No node in the double linked list!!");
@@ -188,14 +197,7 @@ public class DoubleLinkedList {
         }
     }
 
-    public MyNode getHeader(){
-        System.out.println("The header node is: " + header.getIData());
-        return header;
-    }
-    public MyNode getTail(){
-        System.out.println("The tail node is: " + tail.getIData());
-        return tail;
-    }
+
 
     public static void main(String[] args){
         DoubleLinkedList doubleLK = new DoubleLinkedList();
@@ -243,8 +245,4 @@ public class DoubleLinkedList {
         doubleLK.traversal();
 
     }
-
-
-
-
 }
