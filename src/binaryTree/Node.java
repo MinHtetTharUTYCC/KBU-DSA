@@ -18,6 +18,11 @@ public class Node {
     public int getData(){
         return data;
     }
+
+    public void setData(int data) {
+        this.data = data;
+    }
+
     public Node getright(){
         //System.out.println("Right child node : "+right.getData());
         return right;
