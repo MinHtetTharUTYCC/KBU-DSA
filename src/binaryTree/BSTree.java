@@ -2,55 +2,81 @@ package binaryTree;
 
 public class BSTree {
     private Node root;
-    
+    private long lastTimeInorder = 0;
+    private long lastTimePreorder = 0;
+    private long lastTimePostorder = 0;
+
     public BSTree(){
         root = null;
     }
 
+//    public void insert(int data){
+//        Node newNode = new Node(data);
+//        System.out.println("newnode "+newNode.getData());
+//
+//        if(root==null){
+//            root=newNode;
+//            System.out.println("Root");
+//            return;
+//        }
+//
+//        Node current = root;
+//
+//
+//        while(true){
+//
+//            if(data<current.getData()){
+//                if(current.getleft()==null){
+//                    current.setleft(newNode);
+//                    current=newNode;
+//                    System.out.println("Left");
+//                    return;
+//                }else{
+//                    current=current.getleft();
+//                }
+//
+//            }else if(data>current.getData()){
+//
+//                if(current.getright()==null){
+//                    current.setright(newNode);
+//                    current=newNode;
+//                    System.out.println("Right");
+//                    return;
+//                }else{
+//                    current=current.getright();
+//                }
+//
+//            }else{
+//                return;
+//            }
+//
+//        }
+//
+//    }
+
     public void insert(int data){
-        Node newNode = new Node(data);
-        System.out.println("newnode "+newNode.getData());
-        
-        if(root==null){
-            root=newNode;
-            System.out.println("Root");
-            return;
-        }
-      
-        Node current = root;
-
-        
-        while(true){
-           
-            if(data<current.getData()){
-                if(current.getleft()==null){
-                    current.setleft(newNode);
-                    current=newNode;
-                    System.out.println("Left");
-                    return;
-                }else{
-                    current=current.getleft();
-                }
-                             
-            }else if(data>current.getData()){
-                
-                if(current.getright()==null){
-                    current.setright(newNode);
-                    current=newNode;
-                    System.out.println("Right");
-                    return;
-                }else{
-                    current=current.getright();
-                }
-                
-            }else{
-                return;
-            }
-                    
-        }
-
+        root = insertRecursive(root,data);
     }
 
+    public Node insertRecursive(Node current,int data){
+        if(current==null){
+            System.out.println("Root node is: " + data);
+            System.out.println("Finished");
+            return new Node(data);
+        }
+
+        if(data < current.getData()){
+            System.out.println("Coming Node: "+ data);
+            System.out.println("Check Node: "+ current.getData() + " => going to the left subtree");
+            current.setleft(insertRecursive(current.getleft(),data));
+        }else if(data > current.getData()){
+            System.out.println("Coming Node: "+ data);
+            System.out.println("Check Node : "+ current.getData() + " => going to the right subtree");
+            current.setright(insertRecursive(current.getright(),data));
+        }
+
+        return  current;
+    }
     public boolean searching(int data){
         if(root == null){
             return false;
@@ -76,12 +102,21 @@ public class BSTree {
         inorderHelper(root);
         System.out.println();
     }
+
     private void inorderHelper(Node node){
+        System.out.println("    Please dont call me (╥﹏╥)");
         if(node == null){
             return;
         }
         inorderHelper(node.getleft());
-        System.out.print(node.getData() + " ");
+        long currentTime = System.nanoTime();
+        long diff = (lastTimeInorder == 0) ? 0 : (currentTime - lastTimeInorder);
+
+        System.out.println(node.getData() + " | Time: " + currentTime + " | Diff: +" + diff + " ns");
+
+        lastTimeInorder = currentTime; // Update for the next node
+
+        System.out.println("  >>>Going right ");
         inorderHelper(node.getright());
     }
 
@@ -95,11 +130,13 @@ public class BSTree {
         if(node == null){
             return;
         }
-        System.out.print(node.getData() + " ");
+        long currentTime = System.nanoTime();
+        long diff = (lastTimePreorder == 0) ? 0 : (currentTime - lastTimePreorder);
+        System.out.println(node.getData() + " | Time: " + currentTime + " | Diff: +" + diff + " ns");
+        lastTimePreorder = currentTime; // Update for the next node
         preorderHelper(node.getleft());
         preorderHelper(node.getright());
     }
-
 
     // left,right,root
     public void postorder(){
@@ -112,7 +149,10 @@ public class BSTree {
         }
         postorderHelper(node.getleft());
         postorderHelper(node.getright());
-        System.out.print(node.getData() + " ");
+        long currentTime = System.nanoTime();
+        long diff = (lastTimePostorder == 0) ? 0 : (currentTime - lastTimePostorder);
+        System.out.println(node.getData() + " | Time: " + currentTime + " | Diff: +" + diff + " ns");
+        lastTimePostorder = currentTime; // Update for the next node
     }
 
     public void deleting(int data){
@@ -155,7 +195,7 @@ public class BSTree {
     }
     
     public static void main(String[] args) {
-        
+
         BSTree bst = new BSTree();
         bst.insert(5);
         bst.insert(7);
@@ -163,14 +203,18 @@ public class BSTree {
         bst.insert(3);
         bst.insert(9);
 
-        if(bst.searching(7)){
-            System.out.println("Found 7");
-        }else{
-            System.out.println("Not Found 7");
-        }
+//        if(bst.searching(7)){
+//            System.out.println("Found 7");
+//        }else{
+//            System.out.println("Not Found 7");
+//        }
 
+
+        System.out.println("IN-ORDER:");
         bst.inorder();
+        System.out.println("PRE-ORDER:");
         bst.preorder();
+        System.out.println("POST-ORDER:");
         bst.postorder();
 
         bst.deleting(7);
