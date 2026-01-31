@@ -99,60 +99,110 @@ public class BSTree {
 
     // left,root,right
     public void inorder(){
-        inorderHelper(root);
+        System.out.println("=== Starting Inorder Traversal (Left, Root, Right) ===");
+        inorderHelper(root, 0);
+        System.out.println("=== Inorder Traversal Complete ===");
         System.out.println();
     }
 
-    private void inorderHelper(Node node){
-        System.out.println("    Please dont call me (╥﹏╥)");
+    private void inorderHelper(Node node, int depth){
+        String indent = "    ".repeat(depth);
+        System.out.println(indent + "┌─ inorderHelper(depth:" + depth + ") - current-node: " +
+                (node != null ? node.getData() : "null"));
+
         if(node == null){
+            System.out.println(indent + "└─ >>> Node is null, returning");
             return;
         }
-        inorderHelper(node.getleft());
+
+        System.out.println(indent + "├─ >>> Going LEFT from " + node.getData());
+        inorderHelper(node.getleft(), depth + 1);
+
+        System.out.println(indent + "├─ >>> Back to " + node.getData() + " after left subtree");
+        System.out.println(indent + "├─ >>> Processing ROOT: " + node.getData());
+
         long currentTime = System.nanoTime();
         long diff = (lastTimeInorder == 0) ? 0 : (currentTime - lastTimeInorder);
+        System.out.println(indent + "│  " + node.getData() + " | Time: " + currentTime + " | Diff: +" + diff + " ns");
+        lastTimeInorder = currentTime;
 
-        System.out.println(node.getData() + " | Time: " + currentTime + " | Diff: +" + diff + " ns");
+        System.out.println(indent + "├─ >>> Going RIGHT from " + node.getData());
+        inorderHelper(node.getright(), depth + 1);
 
-        lastTimeInorder = currentTime; // Update for the next node
-
-        System.out.println("  >>>Going right ");
-        inorderHelper(node.getright());
+        System.out.println(indent + "└─ >>> Completed subtree at " + node.getData());
     }
 
 
     // root,left,right
     public void preorder(){
-        preorderHelper(root);
+        System.out.println("=== Starting Preorder Traversal ===");
+        preorderHelper(root, 0);
+        System.out.println("=== Preorder Traversal Complete ===");
         System.out.println();
     }
-    private void preorderHelper(Node node){
+
+    private void preorderHelper(Node node, int depth){
+        String indent = "    ".repeat(depth);
+        System.out.println(indent + "┌─ preorderHelper(depth:" + depth + ") - current-node: " +
+                (node != null ? node.getData() : "null"));
+
         if(node == null){
+            System.out.println(indent + "└─ >>> Node is null, returning");
             return;
         }
+
         long currentTime = System.nanoTime();
         long diff = (lastTimePreorder == 0) ? 0 : (currentTime - lastTimePreorder);
-        System.out.println(node.getData() + " | Time: " + currentTime + " | Diff: +" + diff + " ns");
-        lastTimePreorder = currentTime; // Update for the next node
-        preorderHelper(node.getleft());
-        preorderHelper(node.getright());
+
+        System.out.println(indent + "│  " + node.getData() + " | Time: " + currentTime + " | Diff: +" + diff + " ns");
+        lastTimePreorder = currentTime;
+
+        System.out.println(indent + "├─ >>> Processing ROOT: " + node.getData());
+
+        System.out.println(indent + "├─ >>> Going LEFT from " + node.getData());
+        preorderHelper(node.getleft(), depth + 1);
+
+        System.out.println(indent + "├─ >>> Back to " + node.getData() + " after left subtree");
+        System.out.println(indent + "├─ >>> Going RIGHT from " + node.getData());
+        preorderHelper(node.getright(), depth + 1);
+
+        System.out.println(indent + "└─ >>> Completed subtree at " + node.getData());
     }
 
     // left,right,root
     public void postorder(){
-        postorderHelper(root);
+        System.out.println("=== Starting Postorder Traversal (Left, Right, Root) ===");
+        postorderHelper(root, 0);
+        System.out.println("=== Postorder Traversal Complete ===");
         System.out.println();
     }
-    private void postorderHelper(Node node){
+
+    private void postorderHelper(Node node, int depth){
+        String indent = "    ".repeat(depth);
+        System.out.println(indent + "┌─ postorderHelper(depth:" + depth + ") - current-node: " +
+                (node != null ? node.getData() : "null"));
+
         if(node == null){
+            System.out.println(indent + "└─ >>> Node is null, returning");
             return;
         }
-        postorderHelper(node.getleft());
-        postorderHelper(node.getright());
+
+        System.out.println(indent + "├─ >>> Going LEFT from " + node.getData());
+        postorderHelper(node.getleft(), depth + 1);
+
+        System.out.println(indent + "├─ >>> Back to " + node.getData() + " after left subtree");
+        System.out.println(indent + "├─ >>> Going RIGHT from " + node.getData());
+        postorderHelper(node.getright(), depth + 1);
+
+        System.out.println(indent + "├─ >>> Back to " + node.getData() + " after right subtree");
+        System.out.println(indent + "├─ >>> Processing ROOT: " + node.getData() + " (POSTORDER VISIT)");
+
         long currentTime = System.nanoTime();
         long diff = (lastTimePostorder == 0) ? 0 : (currentTime - lastTimePostorder);
-        System.out.println(node.getData() + " | Time: " + currentTime + " | Diff: +" + diff + " ns");
-        lastTimePostorder = currentTime; // Update for the next node
+        System.out.println(indent + "│  " + node.getData() + " | Time: " + currentTime + " | Diff: +" + diff + " ns");
+        lastTimePostorder = currentTime;
+
+        System.out.println(indent + "└─ >>> Completed and leaving " + node.getData());
     }
 
     public void deleting(int data){
@@ -222,8 +272,6 @@ public class BSTree {
         bst.deleting(4);
         bst.deleting(3);
         bst.deleting(9);
-        bst.inorder();
-
     
     }
     

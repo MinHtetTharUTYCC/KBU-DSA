@@ -31,14 +31,16 @@ public class DailyMain {
 
     static void main() {
         DailyMain myDay = new DailyMain();
-        System.out.println("\n\nMy Monday:");
+        System.out.println("\n\nMY MONDAY:");
         myDay.myMonday();
 
-        System.out.println("\n\nMorning Routines:");
-        myDay.morningRoutine();
+        System.out.println("\n\nMORNING ROUTINE:");
+//        myDay.morningRoutine();
 
-        System.out.println("\n\nSmart Routines:");
-        myDay.smartRoutine();
+        System.out.println("\n\nSMART ROUTINE:");
+        System.out.println("Just woke up now");
+        System.out.println( "I will stop scrolling after 3 hours.");
+//        myDay.smartRoutine();
 
 
     }
